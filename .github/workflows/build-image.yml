@@ -13,12 +13,12 @@ jobs:
       - uses: actions/checkout@v1
       - name: build docker image
         run: |
-          docker build . -t colachen/dnscrypt:v`date +%Y%m%d` -t colachen/dnscrypt:latest
+          docker build . -t colachen/dnscrypt-client:v`date +%Y%m%d` -t colachen/dnscrypt-client:latest
       - name: push image to dockerhub
         run: |
           docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-          docker push colachen/dnscrypt:v`date +%Y%m%d`
-          docker push colachen/dnscrypt:latest
+          docker push colachen/dnscrypt-client:v`date +%Y%m%d`
+          docker push colachen/dnscrypt-client:latest
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
@@ -31,4 +31,4 @@ jobs:
       - uses: actions/checkout@v1
       - name: test binary version
         run: |
-          docker run --rm colachen/dnscrypt:latest dnscrypt-proxy --version
+          docker run --rm colachen/dnscrypt-client:latest dnscrypt-proxy --version
