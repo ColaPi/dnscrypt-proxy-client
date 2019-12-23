@@ -8,7 +8,7 @@ ENV URL=https://github.com/jedisct1/dnscrypt-proxy/releases/download/$VERSION/dn
 
 RUN set -ex &&\
     apk add --update --no-cache --virtual .build curl &&\
-    curl -sSL $URL | tar xz --strip-components=1  -C /usr/local/bin/ linux-arm/dnscrypt-proxy &&\
+    curl -sSL $URL | tar xz --strip-components=1  -C /usr/local/bin/ linux-x86_64/dnscrypt-proxy &&\
     apk del --purge .build
 
 WORKDIR /dnscrypt
