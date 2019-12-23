@@ -1,0 +1,34 @@
+name: build-image
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: build docker image
+        run: |
+          docker build . -t colachen/dnscrypt:v`date +%Y%m%d` -t colachen/dnscrypt:latest
+      - name: push image to dockerhub
+        run: |
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          docker push colachen/dnscrypt:v`date +%Y%m%d`
+          docker push colachen/dnscrypt:latest
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: test binary version
+        run: |
+          docker run --rm colachen/dnscrypt:latest dnscrypt-proxy --version
