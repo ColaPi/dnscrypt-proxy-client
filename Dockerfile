@@ -2,7 +2,7 @@ FROM alpine
 
 LABEL MAINTAINER = colachg <colachg@gmail.com>
 
-ENV VERSION=2.0.39
+ENV VERSION=2.0.42
 ENV LOCAL_PORT=53
 ENV URL=https://github.com/jedisct1/dnscrypt-proxy/releases/download/$VERSION/dnscrypt-proxy-linux_x86_64-$VERSION.tar.gz
 
