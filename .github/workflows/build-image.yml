@@ -31,7 +31,7 @@ jobs:
             echo ::set-output name=version::snapshot
           fi
           echo ::set-output name=build_date::v$(date -u +'%Y%m%d')
-          echo ::set-output name=docker_platforms::linux/arm/v7,linux/arm/v8,linux/amd64
+          echo ::set-output name=docker_platforms::linux/arm/v7,linux/arm64,linux/amd64
           echo ::set-output name=docker_image::colachen/dnscrypt-proxy-client
 
       - 
